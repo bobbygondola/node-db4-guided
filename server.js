@@ -1,12 +1,23 @@
 const express = require('express');
 const helmet = require('helmet');
+const morgan = require('morgan');
 
+//database
 const db = require('./data/db-config.js');
 
+//declare server
 const server = express();
 
+//middleware
+server.use(morgan());
 server.use(helmet());
 server.use(express.json());
+
+
+//functions
+server.get('/', (req,res) => {
+  res.status(200).json({API:"is up bro"})
+})
 
 server.get('/api/species', (req, res) => {
   // get all species from the database
